@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Culture Transformation Pilot - Novus Logic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <style>
+/* CORE SETUP */
+* { box-sizing: border-box; }
+
+body {
+    background-color: #0f172a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin: 0;
+    padding: 40px 0;
+    font-family: 'Urbanist', sans-serif;
+    color: #f8fafc;
+}
+
+/* SLIDE CONTAINER */
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    background-color: #020617;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid #1e293b;
+    /* Removed opacity/transition logic ensuring full visibility */
+}
+
+/* SLIDE NUMBER */
+.slide-number {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    font-size: 14px;
+    color: #475569;
+    font-weight: 700;
+}
+
+/* TYPOGRAPHY */
+h1 { font-size: 64px; line-height: 1.1; margin: 0 0 20px 0; font-weight: 900; }
+h2 { font-size: 42px; margin: 0 0 30px 0; padding-bottom: 20px; border-bottom: 2px solid #1e293b; width: 100%; }
+h3 { font-size: 28px; margin: 0 0 15px 0; color: #fff; }
+p, li { font-size: 20px; line-height: 1.6; color: #cbd5e1; margin: 0 0 15px 0; }
+
+.accent-text {
+    color: #6366f1;
+    background: -webkit-linear-gradient(45deg, #6366f1, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* LAYOUT UTILITIES */
+.content-wrapper { display: flex; flex-direction: column; height: 100%; justify-content: center; z-index: 1; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; height: 100%; align-items: center; }
+.grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+
+/* ABSTRACT BACKGROUNDS (CSS ONLY - NO IMAGES) */
+.bg-abstract-1 {
+    position: absolute; inset: 0; opacity: 0.2;
+    background: radial-gradient(circle at 100% 0%, #4f46e5 0%, transparent 50%), radial-gradient(circle at 0% 100%, #10b981 0%, transparent 50%);
+}
+.bg-grid {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image: linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* CARDS & TILES */
+.card {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.feature-tile {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 25px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid #334155;
+    border-radius: 12px;
+}
+.feature-icon {
+    font-size: 32px;
+    color: #6366f1;
+    min-width: 40px;
+}
+
+/* ANIMATIONS - Standard CSS (Runs on load) */
+.anim-fade-up {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* KOTTER WHEEL SVG STYLES */
+.kotter-wheel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.step-circle { fill: #1e293b; stroke: #6366f1; stroke-width: 2; transition: all 0.3s; }
+.step-text { font-family: 'Urbanist', sans-serif; fill: #fff; font-size: 14px; font-weight: bold; text-anchor: middle; }
+.step-number { font-size: 24px; fill: #6366f1; font-weight: 900; }
+.active-step .step-circle { fill: #6366f1; stroke: #fff; }
+.active-step .step-text { fill: #fff; }
+.active-step .step-number { fill: #fff; }
+.connector-line { stroke: #334155; stroke-width: 2; stroke-dasharray: 5; }
+
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide-container">
+    <div class="bg-abstract-1"></div>
+    <div class="bg-grid"></div>
+    <div class="content-wrapper" style="align-items: center; text-align: center;">
+        <div style="margin-bottom: 30px; font-size: 60px; color: #6366f1;">
+            <span class="iconify" data-icon="fluent:molecule-48-filled"></span>
+        </div>
+        <h1 class="anim-fade-up">Integrated Culture<br><span class="accent-text">Transformation Pilot</span></h1>
+        <p class="anim-fade-up delay-200" style="font-size: 24px; color: #94a3b8; margin-top: 20px;">Strategic Proposal for Novus Logic</p>
+        <div class="anim-fade-up delay-400" style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #334155;">
+            <!-- UPDATED TEXT HERE -->
+            <p style="font-size: 18px;">Presented By: <strong>Mckinney & Co., External Advisory Team</strong></p>
+        </div>
+    </div>
+    <div class="slide-number">01</div>
+</div>
+
+<!-- SLIDE 2: CONTEXT -->
+<div class="slide-container">
+    <div class="bg-grid"></div>
+    <div class="content-wrapper">
+        <h2 class="anim-fade-up">The Context: <span class="accent-text">The "Hybrid Paradox"</span></h2>
+        <div class="two-col">
+            <div class="anim-fade-up delay-200">
+                <p style="font-size: 24px; margin-bottom: 30px;">Despite flexibility, data indicates rising friction in three critical areas:</p>
+                <div class="card" style="margin-bottom: 20px; border-left: 4px solid #f43f5e;">
+                    <h3>1. Cognitive Overload</h3>
+                    <p style="font-size: 18px; margin: 0;">Fragmented attention due to unstandardized communication norms.</p>
+                </div>
+                <div class="card" style="margin-bottom: 20px; border-left: 4px solid #f59e0b;">
+                    <h3>2. "Quiet Quitting" (-15%)</h3>
+                    <p style="font-size: 18px; margin: 0;">Drop in discretionary effort; burnout from "visibility theater."</p>
+                </div>
+                <div class="card" style="border-left: 4px solid #ec4899;">
+                    <h3>3. Motivational Inequity</h3>
+                    <p style="font-size: 18px; margin: 0;">Perception that office presence dictates opportunity.</p>
+                </div>
+            </div>
+            <div class="anim-fade-up delay-400" style="display: flex; justify-content: center;">
+                 <!-- CSS Graph Visualization -->
+                 <div style="width: 400px; height: 300px; position: relative; border-left: 2px solid #475569; border-bottom: 2px solid #475569;">
+                    <div style="position: absolute; bottom: 0; left: 10%; width: 20%; height: 80%; background: #334155; border-radius: 4px 4px 0 0;"></div>
+                    <div style="position: absolute; bottom: 0; left: 40%; width: 20%; height: 60%; background: #475569; border-radius: 4px 4px 0 0;"></div>
+                    <div style="position: absolute; bottom: 0; left: 70%; width: 20%; height: 45%; background: #f43f5e; border-radius: 4px 4px 0 0;"></div>
+                    <p style="position: absolute; top: 20%; right: -20px; color: #f43f5e; font-weight: bold;">-15% Effort</p>
+                    <p style="position: absolute; bottom: -40px; width: 100%; text-align: center; color: #94a3b8;">Engagement Trend (18 Months)</p>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">02</div>
+</div>
+
+<!-- SLIDE 3: SOLUTION OVERVIEW -->
+<div class="slide-container">
+    <div class="bg-grid"></div>
+    <div class="content-wrapper">
+        <h2 class="anim-fade-up">The Solution: <span class="accent-text">4 Strategic Pillars</span></h2>
+        <p class="anim-fade-up delay-100" style="margin-bottom: 40px;">A structural recalibration to restore autonomy and trust.</p>
+        <div class="grid-4">
+            <div class="feature-tile anim-fade-up delay-200">
+                <span class="iconify feature-icon" data-icon="ph:clock-bold"></span>
+                <div>
+                    <h3>1. Structural</h3>
+                    <p style="font-size: 16px;">Protected Deep-Work Intervals to reduce switching costs.</p>
+                </div>
+            </div>
+            <div class="feature-tile anim-fade-up delay-300">
+                <span class="iconify feature-icon" data-icon="ph:brain-bold"></span>
+                <div>
+                    <h3>2. Psychological</h3>
+                    <p style="font-size: 16px;">Reflective huddles to normalize uncertainty and risk.</p>
+                </div>
+            </div>
+            <div class="feature-tile anim-fade-up delay-400">
+                <span class="iconify feature-icon" data-icon="ph:users-three-bold"></span>
+                <div>
+                    <h3>3. Social</h3>
+                    <p style="font-size: 16px;">Peer-driven recognition to reinforce prosocial behavior.</p>
+                </div>
+            </div>
+            <div class="feature-tile anim-fade-up delay-500">
+                <span class="iconify feature-icon" data-icon="ph:scales-bold"></span>
+                <div>
+                    <h3>4. Procedural</h3>
+                    <p style="font-size: 16px;">Evidence-based workload allocation (Data > Politics).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">03</div>
+</div>
+
+<!-- SLIDE 4: PILLAR 1 -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <div class="two-col">
+            <div class="anim-fade-up">
+                <h4 style="color: #6366f1; text-transform: uppercase; letter-spacing: 2px;">Pillar 1</h4>
+                <h2>Structural <span class="accent-text">Autonomy</span></h2>
+                <p><strong>The Goal:</strong> Enable "Flow State" by batching coordination.</p>
+                <div class="card" style="margin-top: 30px;">
+                    <h3 style="color: #6366f1;">Protocol: Protected Deep Work</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 15px;"><span class="iconify" data-icon="ph:check-circle" style="color:#10b981; margin-right: 10px;"></span><strong>1:00 PM - 4:00 PM (Tue-Thu)</strong></li>
+                        <li style="margin-bottom: 15px;"><span class="iconify" data-icon="ph:check-circle" style="color:#10b981; margin-right: 10px;"></span>No internal meetings allowed.</li>
+                        <li><span class="iconify" data-icon="ph:check-circle" style="color:#10b981; margin-right: 10px;"></span>Async communication only (Slack snooze encouraged).</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anim-fade-up delay-200" style="display: flex; justify-content: center; align-items: center;">
+                <span class="iconify" data-icon="ph:wall-bold" style="font-size: 250px; color: #1e293b;"></span>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">04</div>
+</div>
+
+<!-- SLIDE 5: PILLAR 2 -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <div class="two-col">
+            <div class="anim-fade-up delay-200" style="display: flex; justify-content: center; align-items: center;">
+                 <span class="iconify" data-icon="ph:shield-check-bold" style="font-size: 250px; color: #1e293b;"></span>
+            </div>
+            <div class="anim-fade-up">
+                <h4 style="color: #6366f1; text-transform: uppercase; letter-spacing: 2px;">Pillar 2</h4>
+                <h2>Psychological <span class="accent-text">Safety</span></h2>
+                <p>Operationalizing Amy Edmondson’s research to move from "aspirational safety" to routine practice.</p>
+                <div class="card" style="margin-top: 30px;">
+                    <h3 style="color: #6366f1;">Protocol: Reflective Huddles</h3>
+                    <p style="font-size: 16px;">Bi-weekly sessions strictly for non-punitive dialogue.</p>
+                    <hr style="border: 0; border-top: 1px solid #334155; margin: 15px 0;">
+                    <p><strong>Agenda:</strong></p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>1. What almost went wrong? (Near Misses)</li>
+                        <li>2. What are we uncertain about? (Intellectual Risk)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">05</div>
+</div>
+
+<!-- SLIDE 6: PILLAR 3 -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <h4 style="color: #6366f1; text-transform: uppercase; letter-spacing: 2px;">Pillar 3</h4>
+        <h2 class="anim-fade-up">Social <span class="accent-text">Reinforcement</span></h2>
+        <div class="two-col">
+            <div class="anim-fade-up delay-200">
+                <p>Combating "Invisible Work" in a hybrid setting.</p>
+                <div class="card">
+                    <h3>Peer-Driven Recognition</h3>
+                    <p>A formalized system to democratize appreciation. Moving beyond top-down "kudos" to lateral reinforcement.</p>
+                    <ul style="margin-top: 20px;">
+                        <li>Makes prosocial behavior visible.</li>
+                        <li>Strengthens "Reciprocity Loops".</li>
+                        <li>Reduces proximity bias.</li>
+                    </ul>
+                </div>
+            </div>
+             <div class="anim-fade-up delay-300">
+                 <!-- CSS Visualization of Network -->
+                 <div style="position: relative; width: 100%; height: 300px;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; border: 2px dashed #334155; border-radius: 50%;"></div>
+                    <span class="iconify" data-icon="ph:user-circle-fill" style="position: absolute; top: 40%; left: 45%; color: #6366f1; font-size: 48px;"></span>
+                    <span class="iconify" data-icon="ph:user-circle-fill" style="position: absolute; top: 20%; left: 20%; color: #94a3b8; font-size: 40px;"></span>
+                    <span class="iconify" data-icon="ph:user-circle-fill" style="position: absolute; bottom: 20%; right: 20%; color: #94a3b8; font-size: 40px;"></span>
+                    <span class="iconify" data-icon="ph:user-circle-fill" style="position: absolute; top: 20%; right: 20%; color: #94a3b8; font-size: 40px;"></span>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">06</div>
+</div>
+
+<!-- SLIDE 7: PILLAR 4 -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <h4 style="color: #6366f1; text-transform: uppercase; letter-spacing: 2px;">Pillar 4</h4>
+        <h2 class="anim-fade-up">Procedural <span class="accent-text">Justice</span></h2>
+        <div class="two-col">
+             <div class="anim-fade-up delay-200" style="display: flex; justify-content: center;">
+                 <span class="iconify" data-icon="ph:chart-bar-bold" style="font-size: 200px; color: #1e293b;"></span>
+             </div>
+            <div class="anim-fade-up delay-300">
+                <p>Replacing "Shoulder Taps" with Data.</p>
+                <div class="card">
+                    <h3>Evidence-Based Allocation</h3>
+                    <p>Standardized decision matrices for project staffing based on:</p>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <span style="background: #1e293b; padding: 5px 15px; border-radius: 20px; font-size: 16px;">Capacity</span>
+                        <span style="background: #1e293b; padding: 5px 15px; border-radius: 20px; font-size: 16px;">Skill Match</span>
+                        <span style="background: #1e293b; padding: 5px 15px; border-radius: 20px; font-size: 16px;">Goals</span>
+                    </div>
+                    <p style="margin-top: 20px; color: #10b981;"><strong>Outcome:</strong> Transparency cures the "us vs. them" mentality.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">07</div>
+</div>
+
+<!-- SLIDE 8: LAUNCH PHASE 1 (WITH KOTTER WHEEL) -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <h2 class="anim-fade-up">Launch Plan: <span class="accent-text">Preparation Phase</span></h2>
+        
+        <div class="two-col">
+            <!-- LEFT: The Kotter Wheel (SVG) -->
+            <div class="kotter-wheel-container anim-fade-up delay-200">
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <circle cx="200" cy="200" r="140" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="5,5" />
+                    <!-- 1. Urgency (Top) -->
+                    <g class="active-step" transform="translate(200, 60)">
+                        <circle class="step-circle" r="30" />
+                        <text class="step-number" dy="5">1</text>
+                        <text class="step-text" dy="-40">Urgency</text>
+                    </g>
+                     <!-- 2. Coalition (Top Right) -->
+                    <g class="active-step" transform="translate(300, 100)">
+                         <circle class="step-circle" r="30" />
+                        <text class="step-number" dy="5">2</text>
+                         <text class="step-text" dy="-40">Coalition</text>
+                    </g>
+                    <!-- 3. Vision (Right) -->
+                    <g class="active-step" transform="translate(340, 200)">
+                         <circle class="step-circle" r="30" />
+                        <text class="step-number" dy="5">3</text>
+                         <text class="step-text" dy="-40">Vision</text>
+                    </g>
+                     <!-- 4. Communicate (Bottom Right) -->
+                    <g class="active-step" transform="translate(300, 300)">
+                         <circle class="step-circle" r="30" />
+                        <text class="step-number" dy="5">4</text>
+                         <text class="step-text" dy="50">Communicate</text>
+                    </g>
+                    <!-- 5. Empower (Bottom) - Greyed out for next slide -->
+                    <g transform="translate(200, 340)">
+                         <circle class="step-circle" r="25" style="fill:#0f172a; stroke:#475569;" />
+                        <text class="step-number" dy="5" style="fill:#475569;">5</text>
+                    </g>
+                     <!-- 6. Wins (Bottom Left) -->
+                    <g transform="translate(100, 300)">
+                         <circle class="step-circle" r="25" style="fill:#0f172a; stroke:#475569;" />
+                        <text class="step-number" dy="5" style="fill:#475569;">6</text>
+                    </g>
+                    <!-- 7. Consolidate (Left) -->
+                    <g transform="translate(60, 200)">
+                         <circle class="step-circle" r="25" style="fill:#0f172a; stroke:#475569;" />
+                        <text class="step-number" dy="5" style="fill:#475569;">7</text>
+                    </g>
+                     <!-- 8. Anchor (Top Left) -->
+                    <g transform="translate(100, 100)">
+                         <circle class="step-circle" r="25" style="fill:#0f172a; stroke:#475569;" />
+                        <text class="step-number" dy="5" style="fill:#475569;">8</text>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- RIGHT: The Content -->
+            <div class="anim-fade-up delay-400">
+                <p style="font-size: 18px; margin-bottom: 20px;">Applying Steps 1-4 of Kotter's Model:</p>
+                <div class="card" style="margin-bottom: 15px;">
+                    <h3 style="font-size: 22px; color: #6366f1;">1. Urgency</h3>
+                    <p style="font-size: 16px; margin: 0;">Define risks of inaction (Today's meeting).</p>
+                </div>
+                <div class="card" style="margin-bottom: 15px;">
+                    <h3 style="font-size: 22px; color: #6366f1;">2. Coalition</h3>
+                    <p style="font-size: 16px; margin: 0;">Assemble Leads (HR, Tech, Ops).</p>
+                </div>
+                 <div class="card" style="margin-bottom: 15px;">
+                    <h3 style="font-size: 22px; color: #6366f1;">3. Vision</h3>
+                    <p style="font-size: 16px; margin: 0;">Define "Autonomy-Supportive" State.</p>
+                </div>
+                 <div class="card">
+                    <h3 style="font-size: 22px; color: #6366f1;">4. Communicate</h3>
+                    <p style="font-size: 16px; margin: 0;">Multi-channel campaign starts next week.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">08</div>
+</div>
+
+<!-- SLIDE 9: LAUNCH PHASE 2 -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <h2 class="anim-fade-up">Launch Plan: <span class="accent-text">Execution Phase</span></h2>
+        <div class="grid-4 anim-fade-up delay-200">
+            <div class="card">
+                <div style="color: #6366f1; font-weight: bold; margin-bottom: 10px;">Step 5: Empower Action</div>
+                <h3>Training & Policy</h3>
+                <p style="font-size: 16px;">- Train Leads on facilitation<br>- Update HR policy for Deep Work blocks</p>
+            </div>
+            <div class="card">
+                <div style="color: #6366f1; font-weight: bold; margin-bottom: 10px;">Step 6: Short-Term Wins</div>
+                <h3>Pilot Recognition</h3>
+                <p style="font-size: 16px;">- Launch peer-system first<br>- Publicize early success stories</p>
+            </div>
+             <div class="card" style="opacity: 0.6;">
+                <div style="color: #94a3b8; font-weight: bold; margin-bottom: 10px;">Step 7: Consolidate</div>
+                <h3>Analyze & Adjust</h3>
+                <p style="font-size: 16px;">- Review pilot data<br>- Refine protocols</p>
+            </div>
+             <div class="card" style="opacity: 0.6;">
+                <div style="color: #94a3b8; font-weight: bold; margin-bottom: 10px;">Step 8: Anchor</div>
+                <h3>Institutionalize</h3>
+                <p style="font-size: 16px;">- Integrate into Performance Reviews</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">09</div>
+</div>
+
+<!-- SLIDE 10: RESISTANCE -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <h2 class="anim-fade-up">Anticipating <span class="accent-text">Resistance</span></h2>
+        <p class="anim-fade-up delay-100">"Resistance is not defiance; it is data."</p>
+        
+        <div class="two-col anim-fade-up delay-200">
+            <div class="card" style="border-top: 4px solid #f43f5e;">
+                <h3><span class="iconify" data-icon="ph:warning-circle-bold" style="color:#f43f5e; vertical-align:middle;"></span> Concern: Time</h3>
+                <p><em>"Huddles take too much time."</em></p>
+                <hr style="border-color: #334155; opacity: 0.5;">
+                <p style="color: #fff;"><strong>Response:</strong> Frame as efficiency investment. Preventing one major error saves 10x meeting time.</p>
+            </div>
+            <div class="card" style="border-top: 4px solid #f43f5e;">
+                <h3><span class="iconify" data-icon="ph:warning-circle-bold" style="color:#f43f5e; vertical-align:middle;"></span> Concern: Fairness</h3>
+                <p><em>"Recognition will be a popularity contest."</em></p>
+                <hr style="border-color: #334155; opacity: 0.5;">
+                <p style="color: #fff;"><strong>Response:</strong> Link strictly to business values/criteria. Transparency in criteria is key.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">10</div>
+</div>
+
+<!-- SLIDE 11: IMPACT -->
+<div class="slide-container">
+    <div class="content-wrapper">
+        <h2 class="anim-fade-up">Projected <span class="accent-text">Impact</span></h2>
+        <div class="two-col">
+            <div class="anim-fade-up delay-200">
+                <h3 style="font-size: 60px; color: #10b981; margin-bottom: 0;">+25%</h3>
+                <p style="font-size: 24px; color: #fff;">Team Cohesion Scores (Year 1)</p>
+                <p style="margin-top: 20px;">Recovery of Discretionary Effort ("Quiet Quitting" Reversal)</p>
+            </div>
+            <div class="anim-fade-up delay-300" style="display: flex; justify-content: center; align-items: flex-end; gap: 20px; height: 300px; padding-bottom: 20px; border-bottom: 2px solid #fff;">
+                <!-- Bar Chart CSS -->
+                <div style="width: 60px; height: 40%; background: #334155; border-radius: 4px 4px 0 0; position: relative;">
+                    <span style="position: absolute; bottom: -30px; left: 0; width: 100%; text-align: center; font-size: 14px;">Q1</span>
+                </div>
+                <div style="width: 60px; height: 55%; background: #475569; border-radius: 4px 4px 0 0; position: relative;">
+                    <span style="position: absolute; bottom: -30px; left: 0; width: 100%; text-align: center; font-size: 14px;">Q2</span>
+                </div>
+                <div style="width: 60px; height: 70%; background: #6366f1; border-radius: 4px 4px 0 0; position: relative;">
+                    <span style="position: absolute; bottom: -30px; left: 0; width: 100%; text-align: center; font-size: 14px;">Q3</span>
+                </div>
+                <div style="width: 60px; height: 90%; background: #10b981; border-radius: 4px 4px 0 0; position: relative;">
+                    <span style="position: absolute; bottom: -30px; left: 0; width: 100%; text-align: center; font-size: 14px;">Q4</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">11</div>
+</div>
+
+<!-- SLIDE 12: CONCLUSION -->
+<div class="slide-container">
+    <div class="bg-abstract-1"></div>
+    <div class="content-wrapper" style="text-align: center; align-items: center;">
+        <h2 class="anim-fade-up" style="border: none;">The Path Forward</h2>
+        <p class="anim-fade-up delay-200" style="font-size: 28px; max-width: 900px;">
+            "The ICTP is not a quick fix; it is a foundation for a resilient Novus Logic."
+        </p>
+        <div class="anim-fade-up delay-400" style="margin-top: 40px;">
+            <p>Moving from a <strong>Fragmented Workforce</strong> &rarr; <strong style="color: #10b981;">Cohesive, Adaptive Organization.</strong></p>
+        </div>
+    </div>
+    <div class="slide-number">12</div>
+</div>
+
+<!-- SLIDE 13: Q&A -->
+<div class="slide-container">
+    <div class="bg-grid"></div>
+    <div class="content-wrapper" style="text-align: center; align-items: center;">
+        <h1 class="anim-fade-up" style="font-size: 120px; color: #6366f1;">?</h1>
+        <h2 class="anim-fade-up delay-200" style="border: none;">Questions & Discussion</h2>
+        <div class="card anim-fade-up delay-400" style="margin-top: 20px;">
+            <p style="margin: 0; color: #cbd5e1;">Proposed Focus:</p>
+            <h3 style="color: #fff; margin: 10px 0;">Implementation Timeline & Resources</h3>
+        </div>
+        <p style="margin-top: 40px; font-size: 16px; color: #64748b;">contact@novuslogic.com</p>
+    </div>
+    <div class="slide-number">13</div>
+</div>
+
+</body>
+</html>
